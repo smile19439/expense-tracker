@@ -1,0 +1,38 @@
+<div class="row mt-5">
+  <div class="col-md-6 m-auto">
+    <div class="card card-body mt-3">
+      <h1 class="text-center">註冊</h1>
+
+      <form action="/user/register" method="POST">
+        <div class="mb-3">
+          <label for="name" class="form-label">暱稱</label>
+          <input type="text" id="name" name="name" class="form-control" placeholder="請輸入想在記帳本顯示的暱稱...">
+        </div>
+
+        <div class="mb-3">
+          <label for="accountId" class="form-label">帳號</label>
+          <input type="text" id="accountId" name="accountId" class="form-control" placeholder="請輸入帳號...">
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">密碼</label>
+          <input type="password" id="password" name="password" class="form-control" placeholder="請輸入密碼...">
+        </div>
+
+        <div class="mb-3">
+          <label for="ConfirmPassword" class="form-label">確認密碼</label>
+          <input type="password" id="ConfirmPassword" name="ConfirmPassword" class="form-control"
+            placeholder="請再次輸入相同密碼...">
+        </div>
+
+        <div class="d-grid gap-2">
+          <button type="submit" class="btn btn-info">確認送出</button>
+        </div>
+      </form>
+
+      <p class="lead mt-4">
+        <a href="/user/login">登入</a>
+      </p>
+    </div>
+  </div>
+</div>
