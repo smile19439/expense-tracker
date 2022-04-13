@@ -1,7 +1,9 @@
 const express = require('express')
+const session = require('express-session')
 const exphbs = require('express-handlebars')
 
 const routes = require('./routes')
+const userPassport = require('./config/passport')
 require('./config/mongoose')
 
 const app = express()
@@ -12,8 +14,20 @@ app.engine('handlebars', exphbs.engine({
 }))
 app.set('view engine', 'handlebars')
 
+app.use(session({
+  secret: 'secretNestEGG',
+  resave: false,
+  saveUninitialized: true
+}))
+
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
+
+userPassport(app)
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.isAuthenticated()
+  next()
+})
 
 app.use(routes)
 
