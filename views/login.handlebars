@@ -2,16 +2,17 @@
   <div class="col-md-6 m-auto">
     <div class="card card-body mt-3">
       <h1 class="text-center">登入</h1>
+      {{> message}}
 
       <form action="/user/login" method="POST">
         <div class="mb-3">
           <label for="accountId" class="form-label">帳號</label>
-          <input type="text" id="accountId" name="accountId" class="form-control" placeholder="請輸入帳號...">
+          <input type="text" id="accountId" name="accountId" class="form-control" placeholder="請輸入帳號..." value="{{accountId}}">
         </div>
 
         <div class="mb-3">
           <label for="password" class="form-label">密碼</label>
-          <input type="password" id="password" name="password" class="form-control" placeholder="請輸入密碼...">
+          <input type="password" id="password" name="password" class="form-control" placeholder="請輸入密碼..." value="{{password}}">
         </div>
 
         <div class="d-grid gap-2">

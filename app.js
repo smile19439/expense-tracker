@@ -1,6 +1,7 @@
 const express = require('express')
 const session = require('express-session')
 const exphbs = require('express-handlebars')
+const flash = require('connect-flash')
 
 const routes = require('./routes')
 const userPassport = require('./config/passport')
@@ -24,8 +25,12 @@ app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
 
 userPassport(app)
+app.use(flash())
 app.use((req, res, next) => {
   res.locals.isAuthenticated = req.isAuthenticated()
+  res.locals.error = req.flash('error')
+  res.locals.success_msg = req.flash('success_msg')
+  res.locals.warning_msg = req.flash('warning_msg')
   next()
 })
 
