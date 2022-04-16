@@ -1,0 +1,33 @@
+.striped-list > li:nth-of-type(odd){
+  background-color: #f4f5f4;
+}
+
+.fa-solid {
+  color: #87A195;
+  align-self: center;
+  font-size: 2.5rem;
+}
+
+.btn-login {
+  color: #80A17F;
+  border: #80A17F 1.5px solid;
+}
+
+.btn-edit {
+  color: #f4f5f4;
+  background-color: #80A17F;
+}
+
+.btn-delete {
+  color: #f4f5f4;
+  background-color: #C25371;
+}
+
+.btn-create {
+  display: block;
+  width: 300px;
+  margin: 20px auto 0;
+  color: #f4f5f4;
+  font-weight: 500;
+  background-color: #4D6E4C;
+}

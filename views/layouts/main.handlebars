@@ -7,11 +7,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>家庭記帳本</title>
   <link rel="stylesheet" href="/stylesheets/bootstrap.css">
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <script src="https://kit.fontawesome.com/1a3d1e21cb.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
+  <header>
+    <nav class="navbar navbar-light bg-light sticky-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">家庭記帳本</a>
+        {{#if isAuthenticated}}
+          <a href="/user/logout" class="btn btn-login">登出</a>
+        {{else}}
+          <a href="/user/login" class="btn btn-login">登入</a>
+        {{/if}}
+      </div>
+    </nav>
+  </header>
 
-  {{{body}}}
+  <div class="container-sm px-5">
+    {{{body}}}
+  </div>
+
   <script src="/javascripts/bootstrap.bundle.js"></script>
 </body>
 
