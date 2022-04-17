@@ -69,4 +69,14 @@ router.put('/:recordId', (req, res) => {
     .catch(error => console.log(error))
 })
 
+// 刪除
+router.delete('/:recordId', (req, res) => {
+  const id = req.params.recordId
+
+  return Record.findById(id)
+    .then(record => record.remove())
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
+
 module.exports = router
