@@ -5,6 +5,44 @@ const moment = require('moment')
 const Record = require('../../models/record')
 const Category = require('../../models/category')
 
+// 新增
+router.get('/create', (req, res) => {
+  return Category.find()
+    .lean()
+    .sort({ _id: 'asc' })
+    .then(categorys => {
+      return res.render('create', { categorys })
+    })
+    .catch(error => console.log(error))
+})
+
+router.post('/create', (req, res) => {
+  const userId = req.user._id
+  const { category, date, name, amount } = req.body
+
+  if (!category || !date || !name || !amount) {
+    const errors = ['所有欄位都必填喔！']
+    return Category.find()
+      .lean()
+      .sort({ _id: 'asc' })
+      .then(categorys => {
+        categorys.map(element => {
+          if (element.name === category) {
+            element.isSelected = true
+          }
+        })
+        return res.render('create', { category, date, name, amount, errors, categorys })
+      })
+      .catch(error => console.log(error))
+  }
+  return Category.findOne({ name: category })
+    .then(category => {
+      return Record.create({ name, date, amount, categoryId: category, userId})
+    })
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
+
 // 修改
 router.get('/:recordId/edit', (req, res) => {
   const recordId = req.params.recordId
