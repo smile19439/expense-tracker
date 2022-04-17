@@ -10,8 +10,8 @@ router.get('/create', (req, res) => {
   return Category.find()
     .lean()
     .sort({ _id: 'asc' })
-    .then(categorys => {
-      return res.render('create', { categorys })
+    .then(categories => {
+      return res.render('create', { categories })
     })
     .catch(error => console.log(error))
 })
@@ -25,13 +25,13 @@ router.post('/create', (req, res) => {
     return Category.find()
       .lean()
       .sort({ _id: 'asc' })
-      .then(categorys => {
-        categorys.map(element => {
+      .then(categories => {
+        categories.map(element => {
           if (element.name === category) {
             element.isSelected = true
           }
         })
-        return res.render('create', { category, date, name, amount, errors, categorys })
+        return res.render('create', { category, date, name, amount, errors, categories })
       })
       .catch(error => console.log(error))
   }
@@ -50,7 +50,7 @@ router.get('/:recordId/edit', (req, res) => {
   return Category.find()
     .lean()
     .sort({ _id: 'asc' })
-    .then(categorys => {
+    .then(categories => {
       return Record.findOne({ _id: recordId })
         .populate('categoryId')
         .lean()
@@ -58,13 +58,13 @@ router.get('/:recordId/edit', (req, res) => {
           record.date = moment(record.date).format("YYYY-MM-DD") //格式化日期
 
           // 將類別陣列中，與record相同類別名稱的項目加上isSelected
-          categorys.map(category => {
+          categories.map(category => {
             if (category.name === record.categoryId.name) {
               category.isSelected = true
             }
           })
 
-          return res.render('edit', { record, categorys })
+          return res.render('edit', { record, categories })
         })
         .catch(error => console.log(error))
     })
@@ -81,13 +81,13 @@ router.put('/:recordId', (req, res) => {
     return Category.find()
       .lean()
       .sort({ _id: 'asc' })
-      .then(categorys => {
-        categorys.map(category => {
+      .then(categories => {
+        categories.map(category => {
           if (category.name === record.category) {
             category.isSelected = true
           }
         })
-        return res.render('edit', { record, errors, categorys })
+        return res.render('edit', { record, errors, categories })
       })
       .catch(error => console.log(error))
   }

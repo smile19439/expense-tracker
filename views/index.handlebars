@@ -1,3 +1,13 @@
+{{!-- 篩選 --}}
+<form action="/">
+  <select name="category" id="category" class="form-control mt-3" onchange="this.form.submit()">
+    <option value="所有類別">所有類別</option>
+    {{#each categories}}
+      <option value="{{this.name}}" {{#if this.isSelected}}selected{{/if}}>{{this.name}}</option>
+    {{/each}}
+  </select>
+</form>
+
 {{!-- 總金額 --}}
 <div class="d-flex justify-content-evenly mt-3">
   <h3>總金額:</h3>

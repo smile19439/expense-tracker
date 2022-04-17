@@ -7,7 +7,7 @@
         <div class="input-group mb-3">
           <label for="category" class="text-secondary">類別：</label>
           <select name="category" id="category" class="form-control">
-            {{#each categorys}}
+            {{#each categories}}
             <option value="{{this.name}}" {{#if this.isSelected}}selected{{/if}}>{{this.name}}</option>
             {{/each}}
           </select>
