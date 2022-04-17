@@ -13,6 +13,11 @@
   border: #80A17F 1.5px solid;
 }
 
+.total {
+  color: #374F37;
+  font-size: 70px;
+}
+
 .btn-edit {
   color: #f4f5f4;
   background-color: #80A17F;
@@ -26,7 +31,7 @@
 .btn-create {
   display: block;
   width: 300px;
-  margin: 20px auto 0;
+  margin: 20px auto;
   color: #f4f5f4;
   font-weight: 500;
   background-color: #4D6E4C;

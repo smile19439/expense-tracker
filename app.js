@@ -2,6 +2,7 @@ const express = require('express')
 const session = require('express-session')
 const exphbs = require('express-handlebars')
 const flash = require('connect-flash')
+const methodOverride = require('method-override')
 
 const routes = require('./routes')
 const userPassport = require('./config/passport')
@@ -23,6 +24,7 @@ app.use(session({
 
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
+app.use(methodOverride('_method'))
 
 userPassport(app)
 app.use(flash())
