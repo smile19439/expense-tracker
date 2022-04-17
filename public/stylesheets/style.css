@@ -13,6 +13,17 @@
   border: #80A17F 1.5px solid;
 }
 
+.btn-info {
+  color: white;
+  background-color: #4D6E4C;
+  border-color: #4D6E4C;
+}
+
+.btn-info:hover {
+  background-color: #80A17F;
+  border-color: #80A17F;
+}
+
 .total {
   color: #374F37;
   font-size: 70px;
