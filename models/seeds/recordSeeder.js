@@ -50,7 +50,7 @@ db.once('open', () => {
   )
     .then(() => {
       console.log('done!')
-      process.exit()
     })
-    .catch(err => console.log(err))
+    .catch(console.log)
+    .finally(() => process.exit())
 })
