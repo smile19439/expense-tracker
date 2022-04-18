@@ -1,5 +1,8 @@
-const db = require('../../config/mongoose')
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 
+const db = require('../../config/mongoose')
 const Category = require('../category')
 
 const CATEGORY = [{
