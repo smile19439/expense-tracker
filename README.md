@@ -26,11 +26,13 @@ git clone https://github.com/smile19439/expense-tracker.git
 npm install
 ```
   
-4.輸入以下指令載入種子資料
+4.依照.env.example檔案格式，新增一個.env檔案
+
+5.輸入以下指令載入種子資料
 ```
 npm run seed
 ```
-5.若您有安裝nodemon，可使用以下指令執行
+6.若您有安裝nodemon，可使用以下指令執行
 ```
 npm run dev
 ```
@@ -38,8 +40,8 @@ npm run dev
 ```
 npm run start
 ```
-6.終端機顯示以下訊息即代表成功啟動  
+7.終端機顯示以下訊息即代表成功啟動  
 >App is runing on http://localhost:3000
   
-7.點擊以下路徑即可開始使用
+8.點擊以下路徑即可開始使用，可使用測試帳號登入:帳號:user1/密碼:1111
 >http://localhost:3000
