@@ -21,7 +21,7 @@ router.get('/register', (req, res) => {
   res.render('register')
 })
 
-router.post('/register', (req, res) => {
+router.post('/register', (req, res, next) => {
   const { name, accountId, password, ConfirmPassword } = req.body
   const errors = []
 
@@ -50,9 +50,9 @@ router.post('/register', (req, res) => {
           req.flash('success_msg', '恭喜註冊成功! 登入後就可以開始使用囉!')
           return res.redirect('/user/login')
         })
-        .catch(error => console.log(error))
+        .catch(error => next(error))
     })
-    .catch(error => console.log(error))
+    .catch(error => next(error))
 })
 
 router.get('/logout', (req, res) => {

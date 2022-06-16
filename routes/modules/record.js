@@ -6,17 +6,17 @@ const Record = require('../../models/record')
 const Category = require('../../models/category')
 
 // 新增
-router.get('/create', (req, res) => {
+router.get('/create', (req, res, next) => {
   return Category.find()
     .lean()
     .sort({ _id: 'asc' })
     .then(categories => {
       return res.render('create', { categories })
     })
-    .catch(error => console.log(error))
+    .catch(error => next(error))
 })
 
-router.post('/create', (req, res) => {
+router.post('/create', (req, res, next) => {
   const userId = req.user._id
   const { category, date, name, amount } = req.body
 
@@ -33,18 +33,18 @@ router.post('/create', (req, res) => {
         })
         return res.render('create', { category, date, name, amount, errors, categories })
       })
-      .catch(error => console.log(error))
+      .catch(error => next(error))
   }
   return Category.findOne({ name: category })
     .then(category => {
       return Record.create({ name, date, amount, categoryId: category, userId})
     })
     .then(() => res.redirect('/'))
-    .catch(error => console.log(error))
+    .catch(error => next(error))
 })
 
 // 修改
-router.get('/:recordId/edit', (req, res) => {
+router.get('/:recordId/edit', (req, res, next) => {
   const recordId = req.params.recordId
 
   return Category.find()
@@ -66,12 +66,12 @@ router.get('/:recordId/edit', (req, res) => {
 
           return res.render('edit', { record, categories })
         })
-        .catch(error => console.log(error))
+        .catch(error => next(error))
     })
-    .catch(error => console.log(error))
+    .catch(error => next(error))
 })
 
-router.put('/:recordId', (req, res) => {
+router.put('/:recordId', (req, res, next) => {
   const _id = req.params.recordId
   const { category, date, name, amount } = req.body
 
@@ -89,7 +89,7 @@ router.put('/:recordId', (req, res) => {
         })
         return res.render('edit', { record, errors, categories })
       })
-      .catch(error => console.log(error))
+      .catch(error => next(error))
   }
 
   return Category.findOne({ name: category })
@@ -102,19 +102,19 @@ router.put('/:recordId', (req, res) => {
           return record.save()
         })
         .then(() => res.redirect('/'))
-        .catch(error => console.log(error))
+        .catch(error => next(error))
     })
-    .catch(error => console.log(error))
+    .catch(error => next(error))
 })
 
 // 刪除
-router.delete('/:recordId', (req, res) => {
+router.delete('/:recordId', (req, res, next) => {
   const id = req.params.recordId
 
   return Record.findById(id)
     .then(record => record.remove())
     .then(() => res.redirect('/'))
-    .catch(error => console.log(error))
+    .catch(error => next(error))
 })
 
 module.exports = router

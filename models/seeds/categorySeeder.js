@@ -31,6 +31,6 @@ db.once('open', () => {
     .then(() => {
       console.log('done!')
     })
-    .catch(console.log)
+    .catch(error => console.error(error))
     .finally(() => process.exit())
 })

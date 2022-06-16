@@ -6,7 +6,7 @@ const Record = require('../../models/record')
 const Category = require('../../models/category')
 const getTotalAmount = require('../../models/TotalAmount')
 
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
   const userId = req.user._id
   const categoryName = req.query.category
 
@@ -40,7 +40,7 @@ router.get('/', (req, res) => {
                 })
                 return res.render('index', { records, totalValue, categories })
               })
-              .catch(error => console.log(error))
+              .catch(error => next(error))
           }
 
           // 選取的類別
@@ -59,11 +59,11 @@ router.get('/', (req, res) => {
               })
               return res.render('index', { records, totalValue, categories })
             })
-            .catch(error => console.log(error))
+            .catch(error => next(error))
         })
-        .catch(error => console.log(error))
+        .catch(error => next(error))
     })
-    .catch(error => console.log(error))
+    .catch(error => next(error))
 })
 
 module.exports = router
