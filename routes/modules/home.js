@@ -20,6 +20,10 @@ router.get('/', (req, res, next) => {
           category.isSelected = true
         }
       })
+      // 選取的類別
+      const categoryId = categories.find(element => {
+        return element.name === categoryName
+      })
 
       Promise.resolve(getTotalAmount(userId, categoryName)) //取得金額總和
         .then(totalAmount => {
@@ -29,27 +33,8 @@ router.get('/', (req, res, next) => {
           }
 
           const totalValue = totalAmount[0].total
-          if (categoryName === undefined || categoryName === '所有類別') {
-            return Record.find({ userId })
-              .populate('categoryId')
-              .lean()
-              .sort({ date: 'asc' })
-              .then(records => {
-                records.map(record => {
-                  record.date = moment(record.date).format("YYYY/MM/DD")
-                })
-                return res.render('index', { records, totalValue, categories })
-              })
-              .catch(error => next(error))
-          }
-
-          // 選取的類別
-          const categoryId = categories.find(element => {
-            return element.name === categoryName
-          })
-
-          // 依使用者id及類別取得record資料
-          return Record.find({ userId, categoryId })
+          // 取得record資料
+          return Record.find(categoryId ? { userId, categoryId } : { userId })
             .populate('categoryId')
             .lean()
             .sort({ date: 'asc' })
