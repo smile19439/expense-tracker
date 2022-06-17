@@ -21,6 +21,7 @@ const SEED_USER = [{
 }]
 
 db.once('open', () => {
+  // 建立使用者種子資料
   return Promise.all(
     Array.from({ length: SEED_USER.length }, (_, i) => {
       return bcrypt
@@ -29,30 +30,30 @@ db.once('open', () => {
           SEED_USER[i].password,
           salt
         ))
-
-        // 建立使用者種子資料
         .then(hash => User.create(
           Object.assign(SEED_USER[i], { password: hash })
         ))
-
-        // 建立支出紀錄種子資料
         .then(user => {
           const userId = user._id
-          return Category.find()
-            .then(category => {
-              return Promise.all(
-                Array.from({ length: 5 }, (_, i) => Record.create({
-                  name: `name-${i}`,
-                  date: Date.now(),
-                  amount: (i + 1) * 10,
-                  userId,
-                  categoryId: category[i]._id
-                }))
-              )
-            })
+          return userId
         })
     })
   )
+    // 建立支出紀錄種子資料
+    .then(userId => {
+      return Category.find()
+        .then(category => {
+          return Promise.all(
+            Array.from({ length: category.length * userId.length }, (_, i) => Record.create({
+              name: `name-${i}`,
+              date: Date.now(),
+              amount: (i + 1) * 10,
+              userId: userId[Math.floor(i / 5)],
+              categoryId: category[i % 5]._id
+            }))
+          )
+        })
+    })
     .then(() => {
       console.log('done!')
     })
