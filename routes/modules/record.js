@@ -26,7 +26,7 @@ router.post('/create', (req, res, next) => {
       .lean()
       .sort({ _id: 'asc' })
       .then(categories => {
-        categories.map(element => {
+        categories.forEach(element => {
           if (element.name === category) {
             element.isSelected = true
           }
@@ -58,7 +58,7 @@ router.get('/:recordId/edit', (req, res, next) => {
           record.date = moment(record.date).format("YYYY-MM-DD") //格式化日期
 
           // 將類別陣列中，與record相同類別名稱的項目加上isSelected
-          categories.map(category => {
+          categories.forEach(category => {
             if (category.name === record.categoryId.name) {
               category.isSelected = true
             }
@@ -82,7 +82,7 @@ router.put('/:recordId', (req, res, next) => {
       .lean()
       .sort({ _id: 'asc' })
       .then(categories => {
-        categories.map(category => {
+        categories.forEach(category => {
           if (category.name === record.category) {
             category.isSelected = true
           }

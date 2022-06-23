@@ -37,7 +37,7 @@ router.get('/', (req, res, next) => {
       }
       const totalValue = totalAmount[0].total
 
-      records.map(record => {
+      records.forEach(record => {
         record.date = moment(record.date).format("YYYY/MM/DD")
       })
       return res.render('index', { records, totalValue, categories })
